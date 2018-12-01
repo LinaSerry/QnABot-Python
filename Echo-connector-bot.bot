@@ -1,0 +1,18 @@
+{
+    "name": "Echo-connector-bot",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:9000",
+            "id": "41f02b60-f4ef-11e8-a615-99e64b0a8ae7",
+            "name": "http://localhost:9000"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0",
+    "overrides": null,
+    "path": "C:\\Users\\liserry\\Documents\\worksafeBot\\botbuilder-python\\samples\\Echo-Connector-Bot\\Echo-connector-bot.bot"
+}
