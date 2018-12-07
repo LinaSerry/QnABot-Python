@@ -12,12 +12,12 @@ from botbuilder.schema import (Activity, ActivityTypes, ChannelAccount)
 from botframework.connector import ConnectorClient
 from botframework.connector.auth import (MicrosoftAppCredentials,
                                          JwtTokenValidation, SimpleCredentialProvider)
-
+#update these values with your own 
 APP_ID = ''
 APP_PASSWORD = ''
-HOST = "worksafebc-demo.azurewebsites.net/qnamaker"
-ENDPOINT_KEY="1e1b9075-87ac-4b54-804c-f1c109791a61"
-KB="eb2f9161-6cf9-4b69-8470-c97afdd22594"
+HOST = ""
+ENDPOINT_KEY=""
+KB=""
 METHOD = "/knowledgebases/"+KB+"/generateAnswer"
 
 
@@ -57,7 +57,8 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
         cont = json.dumps(question)
         conn = http.client.HTTPSConnection(HOST)
        
-        url = "https://worksafebc-demo.azurewebsites.net/qnamaker/knowledgebases/eb2f9161-6cf9-4b69-8470-c97afdd22594/generateAnswer"
+      #Add the url you will be hitting, for example QnA bot endpoint
+        url = ""
        
         r = requests.post(url, data=cont, headers=headers)
         print("response")
@@ -81,8 +82,6 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
         connector = ConnectorClient(credentials, base_url=activity.service_url)
         res = self.__get_response_from_QNA(METHOD,activity.text)
 
-        print("in handler printing response")
-      
         reply = BotRequestHandler.__create_reply_activity(activity, 'You said: %s' % res)
         connector.conversations.send_to_conversation(reply.conversation.id, reply)
 
@@ -103,8 +102,6 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
     def __unhandled_activity(self):
         self.send_response(404)
         self.end_headers()
-        print("in unhandled activity")
-
 
     def do_POST(self):
         body = self.rfile.read(int(self.headers['Content-Length']))
@@ -123,8 +120,7 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
             self.__handle_message_activity(activity)
         else:
             self.__unhandled_activity()
-
-
+            
 try:
     SERVER = http.server.HTTPServer(('localhost', 9000), BotRequestHandler)
     print('Started http server')
